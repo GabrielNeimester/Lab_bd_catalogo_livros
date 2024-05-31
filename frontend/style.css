@@ -1,0 +1,59 @@
+body {
+  background-color: #333333;
+  color: #FFFFFF;
+  margin: 0px;
+  font-family: "Montserrat", sans-serif;
+}
+#titulo-pagina{
+  display: flex;
+  justify-content: center;
+}
+
+#botoes-navegacao
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#botoes-navegacao button{
+  width: 3rem;
+  margin: 2px;
+}
+
+#botoes-navegacao button:hover{
+  background-color: #000000;
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+  cursor: pointer;
+}
+
+#livros-container td, th {
+  color: #000000;
+  padding: 8px 16px 8px 16px;
+}
+
+#livros-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#livros-container table{
+  width: 90%;
+  background-color: #EDEDED;
+}
+
+#livros-container tr:nth-child(even) {
+  background-color: #F9F9F9;
+}
+
+#livros-container tr:nth-child(odd) {
+  background-color: #ffffff; 
+}
+
+#pagina-atual{
+  background-color: #000000;
+  color: #FFFFFF;
+  border-color: #FFFFFF;
+}  

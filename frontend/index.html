@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Livros</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1 id="titulo-pagina">Catálogo de Livros</h1>
+    <div id="livros-container"></div>
+    <div id="botoes-navegacao"></div>
+
+    <script>
+        // Função para fazer a requisição à API
+        async function fetchLivros(pagina) {
+            const response = await fetch(`http://localhost:3000/livro/${pagina}`);
+            const data = await response.json();
+            return data;
+        }
+
+        // Função para renderizar os livros na página
+        async function renderLivros(pagina) {
+            const { livro, totalLivros, indiceInicial, indiceFinal } = await fetchLivros(pagina);
+
+            const totalPaginas = Math.ceil(totalLivros / 10)
+
+            const livrosContainer = document.getElementById('livros-container');
+            livrosContainer.innerHTML = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Autor</th>
+                            <th>ISBN</th>
+                            <th>Páginas</th>
+                            <th>Ano</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${livro.map(livro => `
+                            <tr>
+                                <td>${livro.nome}</td>
+                                <td>${livro.autor}</td>
+                                <td>${livro.ISBN}</td>
+                                <td>${livro.paginas}</td> 
+                                <td>${livro.ano}</td>
+                                <td>R$ ${livro.valor}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                <p>Exibindo de ${indiceInicial} até ${indiceFinal} de ${totalLivros} livros</p>
+            `
+
+            renderBotoesNavegacao(pagina, totalPaginas)
+        }
+
+
+        function renderBotoesNavegacao(pagina, totalPaginas) {
+            const botoesNavegacao = document.getElementById('botoes-navegacao');
+            botoesNavegacao.innerHTML = ''
+
+            // Botão para ir para a primeira página
+            const btnPrimeiraPagina = document.createElement('button')
+            btnPrimeiraPagina.textContent = '<<'
+            btnPrimeiraPagina.addEventListener('click', () => renderLivros(1))
+            botoesNavegacao.appendChild(btnPrimeiraPagina)
+
+            // Botão para ir para a página anterior
+            const btnPaginaAnterior = document.createElement('button')
+            btnPaginaAnterior.textContent = '<'
+            btnPaginaAnterior.addEventListener('click', () => renderLivros(pagina - 1))
+            botoesNavegacao.appendChild(btnPaginaAnterior)
+
+
+            if (pagina >= 4) {
+
+                const btnNavegacao3 = document.createElement('button')
+                btnNavegacao3.textContent = pagina - 3
+                btnNavegacao3.addEventListener('click', () => renderLivros(pagina - 3))
+                botoesNavegacao.appendChild(btnNavegacao3)
+
+            }
+
+            if (pagina >= 3) {
+
+                const btnNavegacao2 = document.createElement('button')
+                btnNavegacao2.textContent = pagina - 2
+                btnNavegacao2.addEventListener('click', () => renderLivros(pagina - 2))
+                botoesNavegacao.appendChild(btnNavegacao2)
+
+            }
+
+            if (pagina >= 2) {
+
+                const btnNavegacao1 = document.createElement('button')
+                btnNavegacao1.textContent = pagina - 1
+                btnNavegacao1.addEventListener('click', () => renderLivros(pagina - 1))
+                botoesNavegacao.appendChild(btnNavegacao1)
+
+            }
+
+            const btnPaginaAtual = document.createElement('button')
+            btnPaginaAtual.textContent = pagina
+            btnPaginaAtual.addEventListener('click', () => renderLivros(pagina))
+            btnPaginaAtual.id = "pagina-atual"
+            botoesNavegacao.appendChild(btnPaginaAtual)
+
+
+            if (pagina <= totalPaginas - 1) {
+
+                const btnNavegacao4 = document.createElement('button')
+                btnNavegacao4.textContent = pagina + 1
+                btnNavegacao4.addEventListener('click', () => renderLivros(pagina + 1))
+                botoesNavegacao.appendChild(btnNavegacao4)
+
+            }
+
+            if (pagina <= totalPaginas - 2) {
+
+                const btnNavegacao5 = document.createElement('button')
+                btnNavegacao5.textContent = pagina + 2
+                btnNavegacao5.addEventListener('click', () => renderLivros(pagina + 2))
+                botoesNavegacao.appendChild(btnNavegacao5)
+
+            }
+
+
+            if (pagina <= totalPaginas - 3) {
+
+                const btnNavegacao6 = document.createElement('button')
+                btnNavegacao6.textContent = pagina + 3
+                btnNavegacao6.addEventListener('click', () => renderLivros(pagina + 3))
+                botoesNavegacao.appendChild(btnNavegacao6)
+
+            }
+
+            // Botão para ir para próxima página
+            const btnProximaPagina = document.createElement('button')
+            btnProximaPagina.textContent = '>'
+            btnProximaPagina.addEventListener('click', () => renderLivros(pagina + 1))
+            botoesNavegacao.appendChild(btnProximaPagina)
+
+            // Botão para ir para a ultima pagina
+            const btnUltimaPagina = document.createElement('button')
+            btnUltimaPagina.textContent = '>>'
+            btnUltimaPagina.addEventListener('click', () => renderLivros(totalPaginas))
+            botoesNavegacao.appendChild(btnUltimaPagina)
+
+
+        }
+
+        renderLivros(1);
+    </script>
+</body>
+
+</html>

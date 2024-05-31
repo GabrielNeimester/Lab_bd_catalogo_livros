@@ -22,17 +22,6 @@ app.listen(PORT, () => {
 });
 
 
-class Livro {
-    constructor(nome, autor, isbn, paginas, ano, valor) {
-        this.nome = nome;
-        this.autor = autor;
-        this.isbn = isbn;
-        this.paginas = paginas;
-        this.ano = ano;
-        this.valor = valor;
-    }
-}
-
 app.get('/livro/:pagina', async (req, res) => {
     const pagina = req.params.pagina;
     const limite = 10

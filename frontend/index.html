@@ -7,7 +7,8 @@
     <title>Catálogo de Livros</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -35,7 +36,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Nome</th>
+                            <th>Título</th>
                             <th>Autor</th>
                             <th>ISBN</th>
                             <th>Páginas</th>
@@ -46,9 +47,9 @@
                     <tbody>
                         ${livro.map(livro => `
                             <tr>
-                                <td>${livro.nome}</td>
+                                <td>${livro.titulo}</td>
                                 <td>${livro.autor}</td>
-                                <td>${livro.ISBN}</td>
+                                <td>${livro.isbn}</td>
                                 <td>${livro.paginas}</td> 
                                 <td>${livro.ano}</td>
                                 <td>R$ ${livro.valor}</td>
@@ -67,18 +68,21 @@
             const botoesNavegacao = document.getElementById('botoes-navegacao');
             botoesNavegacao.innerHTML = ''
 
-            // Botão para ir para a primeira página
-            const btnPrimeiraPagina = document.createElement('button')
-            btnPrimeiraPagina.textContent = '<<'
-            btnPrimeiraPagina.addEventListener('click', () => renderLivros(1))
-            botoesNavegacao.appendChild(btnPrimeiraPagina)
 
-            // Botão para ir para a página anterior
-            const btnPaginaAnterior = document.createElement('button')
-            btnPaginaAnterior.textContent = '<'
-            btnPaginaAnterior.addEventListener('click', () => renderLivros(pagina - 1))
-            botoesNavegacao.appendChild(btnPaginaAnterior)
+            if (pagina > 1) {
 
+                // Botão para ir para a primeira página
+                const btnPrimeiraPagina = document.createElement('button')
+                btnPrimeiraPagina.textContent = '<<'
+                btnPrimeiraPagina.addEventListener('click', () => renderLivros(1))
+                botoesNavegacao.appendChild(btnPrimeiraPagina)
+
+                // Botão para ir para a página anterior
+                const btnPaginaAnterior = document.createElement('button')
+                btnPaginaAnterior.textContent = '<'
+                btnPaginaAnterior.addEventListener('click', () => renderLivros(pagina - 1))
+                botoesNavegacao.appendChild(btnPaginaAnterior)
+            }
 
             if (pagina >= 4) {
 
@@ -142,17 +146,21 @@
 
             }
 
-            // Botão para ir para próxima página
-            const btnProximaPagina = document.createElement('button')
-            btnProximaPagina.textContent = '>'
-            btnProximaPagina.addEventListener('click', () => renderLivros(pagina + 1))
-            botoesNavegacao.appendChild(btnProximaPagina)
+            if (pagina < totalPaginas) {
 
-            // Botão para ir para a ultima pagina
-            const btnUltimaPagina = document.createElement('button')
-            btnUltimaPagina.textContent = '>>'
-            btnUltimaPagina.addEventListener('click', () => renderLivros(totalPaginas))
-            botoesNavegacao.appendChild(btnUltimaPagina)
+                // Botão para ir para próxima página
+                const btnProximaPagina = document.createElement('button')
+                btnProximaPagina.textContent = '>'
+                btnProximaPagina.addEventListener('click', () => renderLivros(pagina + 1))
+                botoesNavegacao.appendChild(btnProximaPagina)
+
+                // Botão para ir para a ultima pagina
+                const btnUltimaPagina = document.createElement('button')
+                btnUltimaPagina.textContent = '>>'
+                btnUltimaPagina.addEventListener('click', () => renderLivros(totalPaginas))
+                botoesNavegacao.appendChild(btnUltimaPagina)
+            }
+
 
 
         }

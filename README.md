@@ -3,7 +3,7 @@ Para executar o projeto:
 1º passo: necessário subir os dados do arquivo "livros.csv" ao mongoDb
 Comando para subir a base de dados livros.csv:
 
-mongoimport --db livros --collection livros --type csv --columnsHaveTypes --file livros.csv --columnsHaveTypes --fields "nome.string(),autor.string(),ISBN.string(),paginas.int32(),ano.int32(),valor.double()"
+mongoimport --db livros --collection livros --type csv --columnsHaveTypes --file livros.csv --columnsHaveTypes --fields "titulo.string(),autor.string(),isbn.string(),paginas.int32(),ano.int32(),valor.double()"
 
 2º passo: no terminal do vs code executar o comando "npm install" para baixar os pacotes do projeto
 

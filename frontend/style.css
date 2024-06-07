@@ -63,8 +63,5 @@ body {
 }
 
 #botoes-navegacao button[disabled]:hover {
-  background-color: inherit;
-  color: inherit;
-  border-color: inherit;
   cursor: not-allowed; 
 }

@@ -69,20 +69,18 @@
             botoesNavegacao.innerHTML = ''
 
 
-            if (pagina > 1) {
+            // Botão para ir para a primeira página
+            const btnPrimeiraPagina = document.createElement('button')
+            btnPrimeiraPagina.textContent = '<<'
+            btnPrimeiraPagina.addEventListener('click', () => renderLivros(1))
+            botoesNavegacao.appendChild(btnPrimeiraPagina)
 
-                // Botão para ir para a primeira página
-                const btnPrimeiraPagina = document.createElement('button')
-                btnPrimeiraPagina.textContent = '<<'
-                btnPrimeiraPagina.addEventListener('click', () => renderLivros(1))
-                botoesNavegacao.appendChild(btnPrimeiraPagina)
+            // Botão para ir para a página anterior
+            const btnPaginaAnterior = document.createElement('button')
+            btnPaginaAnterior.textContent = '<'
+            btnPaginaAnterior.addEventListener('click', () => renderLivros(pagina - 1))
+            botoesNavegacao.appendChild(btnPaginaAnterior)
 
-                // Botão para ir para a página anterior
-                const btnPaginaAnterior = document.createElement('button')
-                btnPaginaAnterior.textContent = '<'
-                btnPaginaAnterior.addEventListener('click', () => renderLivros(pagina - 1))
-                botoesNavegacao.appendChild(btnPaginaAnterior)
-            }
 
             if (pagina >= 4) {
 
@@ -146,22 +144,27 @@
 
             }
 
-            if (pagina < totalPaginas) {
+            // Botão para ir para próxima página
+            const btnProximaPagina = document.createElement('button')
+            btnProximaPagina.textContent = '>'
+            btnProximaPagina.addEventListener('click', () => renderLivros(pagina + 1))
+            botoesNavegacao.appendChild(btnProximaPagina)
 
-                // Botão para ir para próxima página
-                const btnProximaPagina = document.createElement('button')
-                btnProximaPagina.textContent = '>'
-                btnProximaPagina.addEventListener('click', () => renderLivros(pagina + 1))
-                botoesNavegacao.appendChild(btnProximaPagina)
+            // Botão para ir para a ultima pagina
+            const btnUltimaPagina = document.createElement('button')
+            btnUltimaPagina.textContent = '>>'
+            btnUltimaPagina.addEventListener('click', () => renderLivros(totalPaginas))
+            botoesNavegacao.appendChild(btnUltimaPagina)
 
-                // Botão para ir para a ultima pagina
-                const btnUltimaPagina = document.createElement('button')
-                btnUltimaPagina.textContent = '>>'
-                btnUltimaPagina.addEventListener('click', () => renderLivros(totalPaginas))
-                botoesNavegacao.appendChild(btnUltimaPagina)
+            if (pagina === 1) {
+                btnPrimeiraPagina.disabled = true
+                btnPaginaAnterior.disabled = true
             }
 
-
+            if (pagina === totalPaginas) {
+                btnProximaPagina.disabled = true
+                btnUltimaPagina.disabled = true
+            }
 
         }
 

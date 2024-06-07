@@ -57,3 +57,14 @@ body {
   color: #FFFFFF;
   border-color: #FFFFFF;
 }  
+
+#botoes-navegacao button[disabled] {
+  pointer-events: none;
+}
+
+#botoes-navegacao button[disabled]:hover {
+  background-color: inherit;
+  color: inherit;
+  border-color: inherit;
+  cursor: not-allowed; 
+}
